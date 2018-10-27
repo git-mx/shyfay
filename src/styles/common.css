@@ -1,0 +1,11 @@
+.btn-operation {
+    border: 0;
+    color: #1c8de0;
+    background: transparent !important;
+    width:16px;
+    text-decoration: none;
+}
+
+.input-two-column {
+    width: 220px;
+}
