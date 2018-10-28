@@ -166,12 +166,15 @@
                 </el-form-item>
                 <!--为了判断图片的像素大小才不得已这么写，其实可以用element-ui的el-uoload组件很简单-->
                 <el-form-item label-width="80px" label="头像图片">
-                    <el-row>
-                        <el-col :span="24">
-                            <img :src="imageUrl" class="header-image" alt></img>
-                            <input type="file" @change="fileChange" class="input-image" ref="inputFile"/>
-                        </el-col>
-                    </el-row>
+                    <el-upload
+                            class="avatar-uploader"
+                            action="http://localhost:8081/shyfay-admin/upload/uploadImage"
+                            :show-file-list="false"
+                            :on-success="handleAvatarSuccess"
+                            :before-upload="beforeAvatarUpload">
+                        <img v-if="imageUrl" :src="imageUrl" class="avatar">
+                        <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                    </el-upload>
                 </el-form-item>
                 <el-form-item label-width="80px" label="">
                     <el-row>
@@ -192,27 +195,32 @@
     </section>
 </template>
 <script>
-    import js from './user.js';
+    import js from './userre.js';
     export default js;
 </script>
 
 <style scoped>
-    .header-image {
-        background: #FFFFFF;
-        weidth: 132px;
-        height: 132px;
-        border: 1px solid #d9d9d9;
-
+    .avatar-uploader .el-upload {
+        border: 1px dashed #d9d9d9;
+        border-radius: 6px;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
     }
-    /*.header-image:hover {*/
-        /*border: 1px solid #409EFF;*/
-    /*}*/
-    .input-image {
-        position: absolute;
-        top: 2px;
-        left: 2px;
-        width: 125px;
-        height: 125px;
-        opacity: 0;
+    .avatar-uploader .el-upload:hover {
+        border-color: #409EFF;
+    }
+    .avatar-uploader-icon {
+        font-size: 28px;
+        color: #8c939d;
+        width: 178px;
+        height: 178px;
+        line-height: 178px;
+        text-align: center;
+    }
+    .avatar {
+        width: 178px;
+        height: 178px;
+        display: block;
     }
 </style>

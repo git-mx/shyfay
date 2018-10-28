@@ -93,8 +93,6 @@ export default {
         },
         //获取用户列表
         getListData: function () {
-            console.log(this.pageIndex);
-            console.log(this.pageSize);
             this.loading = true;
             var params = { pageIndex: this.pageIndex, pageSize: this.pageSize, departmentName: this.filters.name };
             this.$http.post('/department/listDepartment', params).then((res) => {

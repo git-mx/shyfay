@@ -356,7 +356,7 @@ export default {
             //清空input已经选择的文件
             //其实在非vue框架中，是不需要清空的。在vuejs中如果不清空，那么如果第一次选择的是图片A，然后啥也不干，把
             //对话框关闭，然后再打开对话框再选择图片A，这样是不会触发@change时间的，这可能也是vuejs的坑吧
-            this.$refs.inputFile.value = '';
+            //this.$refs.inputFile.value = '';
             this.formVisible = false;
             this.pngMessage = false;
             this.sizeMessage = false;
@@ -379,87 +379,45 @@ export default {
             };
             this.getListData();
         },
-        fileChange(event) {
-            var file = event.target.files[0];
-            // var file = event.path[0].files[0];
-            let _this = this;
-            const isPNG = file.type === 'image/png';
-            if(isPNG){
-                this.pngMessage = false;
-            }else{
+        handleAvatarSuccess: function(res){
+            console.log('444444444444444444444444');
+            this.imageUrl = res.data;
+            this.formData.imageUrl = res.data;
+        },
+        beforeAvatarUpload: function(file){
+            const isPng = file.type === 'image/png';
+            const isLt2M = file.size < 2097152; //2M
+
+            if (!isPng) {
                 this.pngMessage = true;
                 return false;
             }
-            const isLt2M = file.size < 2097152; //2M
-            if(isLt2M){
-                this.sizeMessage = false;
-            }else{
+            if (!isLt2M) {
                 this.sizeMessage = true;
                 return false;
             }
-            if(isPNG && isLt2M){
-                let url = window.URL.createObjectURL(file);
-                var img = new Image();
-                img.src = url;
-                var isDone = false;
-                img.onload(function() {
+            let _this = this;
+            let isOk = 1;
+            setTimeout(() => {
+                var image = new Image();
+                image.src = window.URL.createObjectURL(file);
+                image.onload = function(){
                     if(this.width == 128 && this.height == 128) {
                         _this.pxMessage = false;
-                        return true;
+                        isOk = 2;
                     } else{
                         _this.pxMessage = true;
-                        return false;
+                        isOk = 3;
                     }
-                }).then((res)=>{
-                    console.log(res);
-                    console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
-                });
-                //其实如果不判断图片的像素大小，其实不用这么麻烦
-                this.checkImgSize(file).then(function(){
-                    var formData = new FormData();
-                    formData.append("file", file);
-                    formData.append("useless","useless");
-                    let headers = {headers: {"Content-Type": "multipart/form-data"}}
-                    _this.$http.post("/upload/uploadImage", formData, headers).then((res)=>{
-                        if(res.data.meta.code === 0 && res.data.data){
-                            _this.imageUrl = res.data.data;
-                            _this.formData.imageUrl = res.data.data;
-                            //HTMLdocument的值并不能重置,因为它是运行时的
-                            //event.target.files = [];
-                        }else{
-                            _this.imageUrl = '';
-                            _this.formData.imageUrl = '';
-                            _this.$message.error('上传图片失败，请联系系统管理员！');
-                        }
-                    });
-                }, function(){
-                    return false;
-                });
-            }
-        },
-        checkImgSize: function checkImgSize(file){
-            let _this = this;
-            return new Promise(function(resolve, reject) {
-                //这里也可以用img.src = window.URL.createObjectURL(file); 不用写FileReader(),
-                //不过FileReader似乎更保险
-                var reader = new FileReader();
-                reader.readAsDataURL(file);
-                reader.onload = function(e) {
-                    var data = e.target.result;
-                    //这里得到的data就是一个base64的图片了
-                    var img = new Image();
-                    img.src = data;
-                    img.onload = function() {
-                        if(this.width == 128 && this.height == 128) {
-                            resolve();
-                            _this.pxMessage = false;
-                        } else{
-                            _this.pxMessage = true;
-                            reject()
-                        }
-                    }
-                };
-            })
+                }
+            }, 200);
+            setInterval(function(){
+                if(isOk != 1)
+                {
+                    return isOk === 2 ? true : false;
+                }
+            });
+            //即使这样也不行，这个函数不会等到setTimeout和setInterval都执行完了才返回，而是直接结束
         },
         errorMessage: function(message){
             if(message){

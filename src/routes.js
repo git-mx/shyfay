@@ -3,7 +3,7 @@ import NotFound from './views/404.vue';
 import Home from './views/Home.vue';
 import Main from './views/Main.vue';
 import sysUser from './views/user/User.vue';
-import Form from './views/nav1/Form.vue';
+import sysUserRe from './views/user/UserRe.vue';
 import departmentIndex from './views/department/Department.vue';
 import positionIndex from './views/position/Position.vue';
 import Page4 from './views/nav2/Page4.vue';
@@ -35,7 +35,7 @@ let routes = [
             { path: '/departmentIndex', component: departmentIndex, name: '部门管理' },
             { path: '/sysPosition', component: positionIndex, name: '职位管理' },
             { path: '/sysUser', component: sysUser, name: '用户管理' },
-            { path: '/sutdent', component: Form, name: '学生管理' }
+            { path: '/sysUserRe', component: sysUserRe, name: '用户管理' }
         ]
     },
     {
