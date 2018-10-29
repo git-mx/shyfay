@@ -4,8 +4,9 @@ import Home from './views/Home.vue';
 import Main from './views/Main.vue';
 import sysUser from './views/user/User.vue';
 import sysUserRe from './views/user/UserRe.vue';
-import departmentIndex from './views/department/Department.vue';
-import positionIndex from './views/position/Position.vue';
+import sysDepartment from './views/department/Department.vue';
+import sysPosition from './views/position/Position.vue';
+import student from './views/student/Student.vue';
 import Page4 from './views/nav2/Page4.vue';
 import Page5 from './views/nav2/Page5.vue';
 import Page6 from './views/nav3/Page6.vue';
@@ -32,10 +33,11 @@ let routes = [
         iconCls: 'el-icon-setting',//图标样式class
         children: [
             { path: '/main', component: Main, name: '主页', hidden: true },
-            { path: '/departmentIndex', component: departmentIndex, name: '部门管理' },
-            { path: '/sysPosition', component: positionIndex, name: '职位管理' },
+            { path: '/sysDepartment', component: sysDepartment, name: '部门管理' },
+            { path: '/sysPosition', component: sysPosition, name: '职位管理' },
             { path: '/sysUser', component: sysUser, name: '用户管理' },
-            { path: '/sysUserRe', component: sysUserRe, name: '用户管理' }
+            { path: '/sysUserRe', component: sysUserRe, name: '用户管理' },
+            { path: '/student', component: student, name: '学生管理'}
         ]
     },
     {

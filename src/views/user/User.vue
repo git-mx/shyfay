@@ -168,7 +168,7 @@
                 <el-form-item label-width="80px" label="头像图片">
                     <el-row>
                         <el-col :span="24">
-                            <img :src="imageUrl" class="header-image" alt></img>
+                            <img :src="imageUrl" class="header-image" alt />
                             <input type="file" @change="fileChange" class="input-image" ref="inputFile"/>
                         </el-col>
                     </el-row>

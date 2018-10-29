@@ -58,11 +58,11 @@ axiosInstance.interceptors.response.use(
 //     initVue();
 //   }
 // });
-axiosInstance.get('http://localhost:8081/shyfay-admin/domain/getDomain').then(function (res) {
+axiosInstance.get('http://localhost:8081/domain/getDomain').then(function (res) {
   if(res.data.meta.code === 0 && res.data.data){
     //axiosInstance.defaults.baseURL = res.data.data
-    axiosInstance.defaults.baseURL = 'http://localhost:8081/shyfay-admin';
-    sessionStorage.setItem('host', 'http://localhost:8081/shyfay-admin');
+    axiosInstance.defaults.baseURL = 'http://localhost:8081';
+    sessionStorage.setItem('host', 'http://localhost:8081');
     initVue();
   }
 });

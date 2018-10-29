@@ -57,7 +57,7 @@ export default {
                             }
                             //存在vuex里面的值在刷新页面的时候会回到初始值，初始值就是在state里声明那个变量的时候给的值
                             //this.$store.dispatch('setUserName', res.data.data.userName)
-                            this.$router.push({ path: '/departmentIndex' });
+                            this.$router.push({ path: '/sysDepartment' });
                         }else{
                             this.$message({
                                 message: res.data.meta.message,
