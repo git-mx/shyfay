@@ -398,22 +398,6 @@ export default {
                 return false;
             }
             if(isPNG && isLt2M){
-                let url = window.URL.createObjectURL(file);
-                var img = new Image();
-                img.src = url;
-                var isDone = false;
-                img.onload(function() {
-                    if(this.width == 128 && this.height == 128) {
-                        _this.pxMessage = false;
-                        return true;
-                    } else{
-                        _this.pxMessage = true;
-                        return false;
-                    }
-                }).then((res)=>{
-                    console.log(res);
-                    console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
-                });
                 //其实如果不判断图片的像素大小，其实不用这么麻烦
                 this.checkImgSize(file).then(function(){
                     var formData = new FormData();

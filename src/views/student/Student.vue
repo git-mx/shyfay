@@ -18,11 +18,8 @@
                     <el-button type="primary" v-on:click="downloadModel">模板下载</el-button>
                 </el-form-item>
                 <el-form-item>
-                    <el-upload
-                            class="upload-demo"
-                            action="https://jsonplaceholder.typicode.com/posts/">
-                        <el-button type="primary">上传数据</el-button>
-                    </el-upload>
+                    <el-button type="primary">上传数据</el-button>
+                    <input type="file" @change="fileChange"  class="input-file" ref="inputFile"/>
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary" v-on:click="downloadData">下载学生数据</el-button>
@@ -37,7 +34,7 @@
             <el-table-column prop="groupNo" label="组号" width="120" align="center"></el-table-column>
             <el-table-column prop="studentName" label="学生姓名" width="120" align="center"></el-table-column>
             <el-table-column prop="parentName" label="家长姓名" width="120" align="center"></el-table-column>
-            <el-table-column prop="contactPhone" label="联系电话" width="200" align="center"></el-table-column>
+            <el-table-column prop="contactPhone" label="联系电话" width="230" align="center"></el-table-column>
             <el-table-column prop="orderNumber" label="订单号" width="200" align="center"></el-table-column>
             <el-table-column fixed="right" label="操作" width="60" align="center">
                 <template  slot-scope="scope">
@@ -85,4 +82,13 @@
 </script>
 <style>
     @import '../../styles/common.css';
+
+    .input-file {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 100px;
+        height: 42px;
+        opacity: 0;
+    }
 </style>

@@ -14,7 +14,6 @@ export default {
             totalCount: 0,
             studentName: '',
             orderNumber: '',
-            modelUrl: 'http://localhost:8081/shyfay-admin/USERRESOURCES/学生数据导入模板.xlsx',
             formData: {
                 studentId: 0,
                 groupNo: 0,
@@ -87,12 +86,40 @@ export default {
             this.formVisible = true;
         },
         downloadModel: function(){
-            window.open(this.modelUrl);
+            var host = sessionStorage.getItem('host');
+            window.location.href = host + '/USERRESOURCES/学生数据导入模板.xlsx';
         },
         downloadData: function(){
             var host = sessionStorage.getItem('host');
             var sessionId = sessionStorage.getItem('sessionId');
             window.location.href = host + '/student/dwonloadData?sessionId='+ sessionId;
+        },
+        fileChange: function(event){
+            var file = event.target.files[0];
+            if(file.size >= 2097152){//2M
+                this.$message.error('上传的文件必须小于5MB!');
+            }else{
+                if(file.name.endsWith('.xls') || file.name.endsWith('.xlsx')){
+                    this.loading = true;
+                    var formData = new FormData();
+                    formData.append("file", file);
+                    let headers = {headers: {"Content-Type": "multipart/form-data"}}
+                    this.$http.post("/student/importData", formData, headers).then((res)=>{
+                        this.loading = false;
+                        if(res.data.meta.code === 0){
+                            this.getListData();
+                            this.$message.success('上传成功!');
+                        }else{
+                            this.errorMessage(res.data.meta.message);
+                        }
+                    }).catch(()=>{
+                        this.innerServerError();
+                    })
+                }else{
+                    this.$message.error('请上传excel文件!');
+                }
+            }
+            this.$refs.inputFile.value = '';
         },
         funRand: function() {
             this.loading = true;
@@ -134,6 +161,7 @@ export default {
             });
         },
         closeForm: function(){
+            this.$refs.inputFile.value = '';
             this.$refs.refForm.resetFields();
             this.formData = {
                 studentId: 0,
@@ -159,6 +187,9 @@ export default {
             }
         },
         innerServerError: function(){
+            this.$refs.inputFile.value = '';
+            this.$refs.refForm.resetFields();
+            this.loading = false;
             this.$message({
                 message: '内部服务器错误，请联系系统管理员！',
                 type: 'error'
