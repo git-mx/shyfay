@@ -28,6 +28,7 @@ export default {
             addOrEdit: 1,
             //这里直接写成'../../assets/add.png'是不行的
             imageUrl: addImage,
+            actionUrl: sessionStorage.getItem('host') + '/upload/uploadImage',
             pngMessage: false,
             sizeMessage: false,
             pxMessage: false,

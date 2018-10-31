@@ -50,32 +50,23 @@ axiosInstance.interceptors.response.use(
     }
 );
 
-// axiosInstance.get('http://132.232.48.14:8081/vue-admin/domain/getDomain').then(function (res) {
-//   if(res.data.meta.code === 0 && res.data.data){
-//     //axiosInstance.defaults.baseURL = res.data.data
-//     axiosInstance.defaults.baseURL = 'http://132.232.48.14:8081/vue-admin';
-//     sessionStorage.setItem('host', 'http://132.232.48.14:8081/vue-admin');
-//     initVue();
-//   }
-// });
-// axiosInstance.get('http://localhost:8081/shyfay-admin/domain/getDomain').then(function (res) {
-//   if(res.data.meta.code === 0 && res.data.data){
-//     //axiosInstance.defaults.baseURL = res.data.data
-//     axiosInstance.defaults.baseURL = 'http://localhost:8081/shyfay-admin';
-//     sessionStorage.setItem('host', 'http://localhost:8081/shyfay-admin');
-//     initVue();
-//   }
+// axiosInstance.get('http://www.chinavres.com/shyfay-admin/domain/getDomain').then(function (res) {
+//     if(res.data.meta.code === 0 && res.data.data){
+//         //axiosInstance.defaults.baseURL = res.data.data
+//         axiosInstance.defaults.baseURL = 'http://www.chinavres.com/shyfay-admin';
+//         sessionStorage.setItem('host', 'http://www.chinavres.com/shyfay-admin');
+//         initVue();
+//     }
 // });
 
-axiosInstance.get('http://localhost:8081/domain/getDomain').then(function (res) {
+axiosInstance.get('http://lzwx.mrwu.xin/shyfay-admin/domain/getDomain').then(function (res) {
     if(res.data.meta.code === 0 && res.data.data){
         //axiosInstance.defaults.baseURL = res.data.data
-        axiosInstance.defaults.baseURL = 'http://localhost:8081';
-        sessionStorage.setItem('host', 'http://localhost:8081');
+        axiosInstance.defaults.baseURL = 'http://lzwx.mrwu.xin/shyfay-admin';
+        sessionStorage.setItem('host', 'http://lzwx.mrwu.xin/shyfay-admin');
         initVue();
     }
 });
-
 
 const router = new VueRouter({
   routes

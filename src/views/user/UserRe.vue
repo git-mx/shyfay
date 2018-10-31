@@ -168,7 +168,7 @@
                 <el-form-item label-width="80px" label="头像图片">
                     <el-upload
                             class="avatar-uploader"
-                            action="http://localhost:8081/shyfay-admin/upload/uploadImage"
+                            :action="actionUrl"
                             :show-file-list="false"
                             :on-success="handleAvatarSuccess"
                             :before-upload="beforeAvatarUpload">

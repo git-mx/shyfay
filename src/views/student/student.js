@@ -187,8 +187,8 @@ export default {
             }
         },
         innerServerError: function(){
+            this.loading = false;
             this.$refs.inputFile.value = '';
-            this.$refs.refForm.resetFields();
             this.loading = false;
             this.$message({
                 message: '内部服务器错误，请联系系统管理员！',
