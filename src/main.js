@@ -59,11 +59,12 @@ axiosInstance.interceptors.response.use(
 //     }
 // });
 
-axiosInstance.get('http://lzwx.mrwu.xin/shyfay-admin/domain/getDomain').then(function (res) {
+axiosInstance.get('http://www.shyfay.com/domain/getDomain').then(function (res) {
     if(res.data.meta.code === 0 && res.data.data){
-        //axiosInstance.defaults.baseURL = res.data.data
-        axiosInstance.defaults.baseURL = 'http://lzwx.mrwu.xin/shyfay-admin';
-        sessionStorage.setItem('host', 'http://lzwx.mrwu.xin/shyfay-admin');
+        axiosInstance.defaults.baseURL = res.data.data
+        sessionStorage.setItem('host', 'http://www.shyfay.com');
+        // axiosInstance.defaults.baseURL = 'http://lzwx.mrwu.xin/shyfay-admin';
+        // sessionStorage.setItem('host', 'http://lzwx.mrwu.xin/shyfay-admin');
         initVue();
     }
 });
